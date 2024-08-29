@@ -1,9 +1,10 @@
+import 'package:eden/models/item.dart'; // Import the Item model
 import 'package:eden/models/shop.dart';
 import 'package:flutter/material.dart';
+
 import '../components/item_tile.dart';
 import 'cart_page.dart';
 import 'item_page.dart'; // Make sure to import the ItemPage
-import 'package:eden/models/item.dart'; // Import the Item model
 
 class ShopPage extends StatefulWidget {
   @override
@@ -38,16 +39,21 @@ class _ShopPageState extends State<ShopPage> {
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.only(left: 20),
-                child: const Text(
-                  "Eden Shop",
-                  style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 45, 88, 48)),
-                ),
+              const SizedBox(
+                width: 20,
+              ),
+              SizedBox(
+                width: 50,
+                child: Image.asset('assets/logo.png'),
+              ),
+              const Text(
+                "Eden Shop",
+                style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 45, 88, 48)),
               ),
               const Spacer(),
               Stack(

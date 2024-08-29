@@ -41,13 +41,21 @@ class _NewsPageState extends State<NewsPage> {
       appBar: AppBar(
         title: Container(
           padding: const EdgeInsets.only(top: 20),
-          child: const Text(
-            "News",
-            style: TextStyle(
-              fontSize: 50,
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 45, 88, 48),
-            ),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 50,
+                child: Image.asset('assets/logo.png'),
+              ),
+              const Text(
+                "Eden News",
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 45, 88, 48),
+                ),
+              )
+            ],
           ),
         ),
       ),

@@ -1,3 +1,5 @@
+import 'dart:developer' as devtools;
+
 import 'package:eden/services/weather_service.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -8,7 +10,7 @@ class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
 
   @override
-  _WeatherPageState createState() => _WeatherPageState();
+  State<WeatherPage> createState() => _WeatherPageState();
 }
 
 class _WeatherPageState extends State<WeatherPage> {
@@ -25,7 +27,7 @@ class _WeatherPageState extends State<WeatherPage> {
     });
 
     String cityName = await _weatherService.getCurrentCity();
-    print(cityName);
+    devtools.log(cityName);
 
     try {
       final weather = await _weatherService.getWeather(cityName);
@@ -34,7 +36,7 @@ class _WeatherPageState extends State<WeatherPage> {
         _isLoading = false;
       });
     } catch (e) {
-      print(e);
+      devtools.log(e.toString());
       _isLoading = false;
     }
   }
@@ -66,7 +68,6 @@ class _WeatherPageState extends State<WeatherPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _fetchWeather();
@@ -76,14 +77,22 @@ class _WeatherPageState extends State<WeatherPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Padding(
-        padding: EdgeInsets.only(top: 20),
-        child: Text(
-          "Weather",
-          style: TextStyle(
-              fontSize: 50,
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 45, 88, 48)),
+          title: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 50,
+              child: Image.asset('assets/logo.png'),
+            ),
+            const Text(
+              "Eden Weather",
+              style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 45, 88, 48)),
+            )
+          ],
         ),
       )),
       body: _isLoading

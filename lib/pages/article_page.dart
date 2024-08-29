@@ -83,7 +83,7 @@ class ArticlePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      article.title ?? "No Title",
+                      article.title,
                       style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,

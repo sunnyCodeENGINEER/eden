@@ -1,3 +1,4 @@
+import 'package:eden/pages/detection_page.dart';
 import 'package:flutter/material.dart';
 
 import 'news_page.dart';
@@ -5,17 +6,21 @@ import 'shop_page.dart';
 import 'weather_page.dart';
 
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   @override
-  _MainPageState createState() => _MainPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
-    ShopPage(),
+    // ShopPage(),
+    const DetectionPage(),
+    
     ShopPage(), // Second shop page
-    NewsPage(),
-    WeatherPage(),
+    const NewsPage(),
+    const WeatherPage(),
   ];
 
   void _onTabTapped(int index) {
