@@ -19,8 +19,25 @@ class NewsPage extends StatelessWidget {
         ),
       ),
       body: const Center(
-        child: Text('Welcome to the News Page'),
-      ),
+          child: Column(
+        children: [
+          Text(
+            'Welcome to the News Page',
+            style: TextStyle(
+              fontSize: 40,
+              color: Color.fromARGB(255, 45, 88, 48),
+            ),
+          ),
+          Text(
+            '40',
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.w900,
+              color: Color.fromARGB(255, 116, 180, 120),
+            ),
+          ),
+        ],
+      )),
     );
   }
 }
