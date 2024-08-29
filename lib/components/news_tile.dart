@@ -1,10 +1,9 @@
+import 'package:eden/models/news_article.dart';
 import 'package:flutter/material.dart';
 
-import '../models/item.dart';
-
-class ItemTile extends StatelessWidget {
-  final Item item;
-  const ItemTile({super.key, required this.item});
+class NewsTile extends StatelessWidget {
+  final NewsArticle article;
+  const NewsTile({super.key, required this.article});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class ItemTile extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 60,
+            width: 80,
             height: 60,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -49,24 +48,47 @@ class ItemTile extends StatelessWidget {
               ],
             ),
             padding: const EdgeInsets.all(2),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(
-                  10), // Adjust the value for the roundness
-              child: Image.asset(
-                item.urlToImage,
-                width: 60,
-                fit: BoxFit.fitWidth,
-              ),
-            ),
+            child: article.urlToImage.isNotEmpty
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                        10), // Adjust the value for the roundness
+                    child: Image.network(
+                      article.urlToImage,
+                      width: 60,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : null,
           ),
           const SizedBox(
             width: 20,
           ),
-          Text(item.name),
-          const Spacer(),
-          Text(
-            'GHs${item.price}',
-            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 30,
+                width: 200,
+                child: Text(
+                  article.title,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
+              ),
+              SizedBox(
+                height: 50,
+                width: 200,
+                child: Text(
+                  article.description,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
           )
         ],
       ),

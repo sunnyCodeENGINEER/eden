@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import '../models/weather.dart';
 
 class WeatherService {
-  static const BASE_URL = 'http;//api.openweathermap.org/data/2.5/weather';
+  static const BASE_URL = 'http://api.openweathermap.org/data/2.5/weather';
   final String apiKey;
 
   WeatherService({required this.apiKey});
@@ -23,23 +23,60 @@ class WeatherService {
     }
   }
 
+  // Future<String> getCurrentCity() async {
+  //   LocationPermission permission = await Geolocator.checkPermission();
+  //   if (permission == LocationPermission.denied) {
+  //     permission = await Geolocator.checkPermission();
+  //   }
+
+  //   // get location
+  //   Position position = await Geolocator.getCurrentPosition(
+  //       desiredAccuracy: LocationAccuracy.high);
+
+  //   // convert location to city name
+  //   List<Placemark> placemarks =
+  //       await placemarkFromCoordinates(position.latitude, position.longitude);
+
+  //   // extract cityname from first placemark
+  //   String? city = placemarks[0].locality;
+
+  //   return city ?? "";
+  // }
+
   Future<String> getCurrentCity() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.checkPermission();
+    // Check if location services are enabled
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled, return an error or prompt the user to enable it
+      return 'Location services are disabled.';
     }
 
-    // get location
+    // Check for location permissions
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, return an error or prompt the user to grant permissions
+        return 'Location permissions are denied.';
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately
+      return 'Location permissions are permanently denied, we cannot request permissions.';
+    }
+
+    // Get current location with high accuracy
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
 
-    // convert location to city name
+    // Convert location to city name
     List<Placemark> placemarks =
         await placemarkFromCoordinates(position.latitude, position.longitude);
 
-    // extract cityname from first placemark
+    // Extract city name from the first placemark
     String? city = placemarks[0].locality;
 
-    return city ?? "";
+    return city ?? 'Unknown location';
   }
 }

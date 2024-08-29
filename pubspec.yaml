@@ -41,6 +41,8 @@ dependencies:
   geolocator: ^13.0.1
   geocoding: ^3.0.0
   lottie: ^3.1.2
+  cached_network_image: ^3.4.1
+  permission_handler: ^11.3.1
 
 dev_dependencies:
   flutter_test:
@@ -66,7 +68,23 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/
+    - assets/sunny.json
+    - assets/cloudy.json
+    - assets/rain.json
+    - assets/thunderstorm.json
+    - assets/hoe.jpeg
+    - assets/shovel.jpeg
+    - assets/tiller.jpeg
+    - assets/garden fork.jpeg
+    - assets/pruning shears.jpeg
+    - assets/rake.jpeg
+    - assets/plow.jpeg
+    - assets/cultivator.jpeg
+    - assets/planter.jpeg
+    - assets/sprayer.jpeg
+    - assets/loader.jpeg
+    - assets/baler.jpeg
+    - assets/mower.jpeg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

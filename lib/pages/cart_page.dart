@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 import 'package:flutter/services.dart';
+import 'package:uuid/uuid.dart';
 
 import '../models/item.dart'; // For copying to clipboard
 
@@ -50,8 +50,14 @@ class _CartPageState extends State<CartPage> {
     String ticketId = uuid.v4();
 
     // Clear the cart
+    // setState(() {
+    //   cartItems.clear();
+    // });
+
     setState(() {
-      cartItems.clear();
+      while (cartItems.isNotEmpty) {
+        _removeItem(cartItems[0]);
+      }
     });
 
     // Show a dialog with the ticket ID

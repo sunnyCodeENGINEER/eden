@@ -1,17 +1,11 @@
-import 'package:eden/models/item.dart'; // Import the Item model
 import 'package:flutter/material.dart';
 
-class ItemPage extends StatefulWidget {
-  final Item item;
-  final Function(Item) onAddToCart; // Callback to add item to cart
+import '../models/news_article.dart';
 
-  const ItemPage({super.key, required this.item, required this.onAddToCart});
+class ArticlePage extends StatelessWidget {
+  final NewsArticle article;
+  const ArticlePage({super.key, required this.article});
 
-  @override
-  _ItemPageState createState() => _ItemPageState();
-}
-
-class _ItemPageState extends State<ItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,15 +51,22 @@ class _ItemPageState extends State<ItemPage> {
                       )
                     ]),
                 padding: const EdgeInsets.all(5),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                      20), // Adjust the value for the roundness
-                  child: Image.asset(
-                    widget.item.urlToImage,
-                    width: 100,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+
+                // child: article.urlToImage.isNotEmpty
+                //     ? Image.network(article.urlToImage,
+                //         width: 100, fit: BoxFit.cover)
+                //     : null,
+                child: article.urlToImage.isNotEmpty
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                            20), // Adjust the value for the roundness
+                        child: Image.network(
+                          article.urlToImage,
+                          width: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : null,
               ),
               const Spacer(),
             ],
@@ -73,39 +74,53 @@ class _ItemPageState extends State<ItemPage> {
           // description
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 20,
+              horizontal: 10,
               vertical: 20,
             ),
             child: Column(
               children: [
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      widget.item.name,
+                      article.title ?? "No Title",
                       style: const TextStyle(
-                          fontSize: 50,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 45, 88, 48)),
                     ),
-                    Row(
-                      children: [
-                        const Spacer(),
-                        Text('GHs${widget.item.price}',
-                            style: const TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold))
-                      ],
-                    ),
+                    Text('By: ${article.author}',
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
                   ],
                 ),
-                SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      widget.item.description,
-                      style: TextStyle(fontSize: 16, color: Colors.black),
-                    ),
-                  ),
+                const Divider(
+                  color: Color.fromARGB(255, 45, 88, 48),
+                ),
+                const Text(
+                  "Description",
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 114, 162, 117)),
+                ),
+                Text(
+                  article.description,
+                  style: const TextStyle(fontSize: 18),
+                ),
+                const Divider(
+                  color: Color.fromARGB(255, 45, 88, 48),
+                ),
+                const Text(
+                  "Contents",
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 114, 162, 117)),
+                ),
+                Text(
+                  article.content,
+                  style: const TextStyle(fontSize: 18),
                 ),
               ],
             ),
@@ -126,26 +141,6 @@ class _ItemPageState extends State<ItemPage> {
           //   ),
           // ),
           const SizedBox(height: 20),
-        ],
-      ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(width: 30),
-          ElevatedButton(
-            onPressed: () {
-              widget.onAddToCart(widget.item); // Call the callback
-              Navigator.pop(context); // Optionally pop the page after adding
-            },
-            child: const Text(
-              'Add to Cart',
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 45, 88, 48)),
-            ),
-          ),
-          // const Spacer()
         ],
       ),
     );
