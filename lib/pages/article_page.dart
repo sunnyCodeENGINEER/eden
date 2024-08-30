@@ -21,10 +21,9 @@ class ArticlePage extends StatelessWidget {
       ),
       backgroundColor: const Color.fromARGB(255, 186, 229, 188),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 10),
-          // image
+          // Image container (green box) - this part will remain fixed
           Row(
             children: [
               const Spacer(),
@@ -51,15 +50,9 @@ class ArticlePage extends StatelessWidget {
                       )
                     ]),
                 padding: const EdgeInsets.all(5),
-
-                // child: article.urlToImage.isNotEmpty
-                //     ? Image.network(article.urlToImage,
-                //         width: 100, fit: BoxFit.cover)
-                //     : null,
                 child: article.urlToImage.isNotEmpty
                     ? ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                            20), // Adjust the value for the roundness
+                        borderRadius: BorderRadius.circular(20),
                         child: Image.network(
                           article.urlToImage,
                           width: 100,
@@ -71,15 +64,13 @@ class ArticlePage extends StatelessWidget {
               const Spacer(),
             ],
           ),
-          // description
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 20,
-            ),
-            child: Column(
-              children: [
-                Column(
+          const SizedBox(height: 20),
+          // Scrollable text content
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
@@ -89,58 +80,45 @@ class ArticlePage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 45, 88, 48)),
                     ),
-                    Text('By: ${article.author}',
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text(
+                      'By: ${article.author}',
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    const Divider(
+                      color: Color.fromARGB(255, 45, 88, 48),
+                    ),
+                    const Text(
+                      "Description",
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 114, 162, 117)),
+                    ),
+                    Text(
+                      article.description,
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    const Divider(
+                      color: Color.fromARGB(255, 45, 88, 48),
+                    ),
+                    const Text(
+                      "Contents",
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 114, 162, 117)),
+                    ),
+                    Text(
+                      article.content,
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    const SizedBox(height: 60),
                   ],
                 ),
-                const Divider(
-                  color: Color.fromARGB(255, 45, 88, 48),
-                ),
-                const Text(
-                  "Description",
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 114, 162, 117)),
-                ),
-                Text(
-                  article.description,
-                  style: const TextStyle(fontSize: 18),
-                ),
-                const Divider(
-                  color: Color.fromARGB(255, 45, 88, 48),
-                ),
-                const Text(
-                  "Contents",
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 114, 162, 117)),
-                ),
-                Text(
-                  article.content,
-                  style: const TextStyle(fontSize: 18),
-                ),
-              ],
+              ),
             ),
           ),
-          const Spacer(),
-          // add to cart button
-          // ElevatedButton(
-          //   onPressed: () {
-          //     widget.onAddToCart(widget.item); // Call the callback
-          //     Navigator.pop(context); // Optionally pop the page after adding
-          //   },
-          //   child: const Text(
-          //     'Add to Cart',
-          //     style: TextStyle(
-          //         fontSize: 16,
-          //         fontWeight: FontWeight.bold,
-          //         color: Color.fromARGB(255, 45, 88, 48)),
-          //   ),
-          // ),
-          const SizedBox(height: 20),
         ],
       ),
     );

@@ -192,9 +192,6 @@ class _CartPageState extends State<CartPage> {
                 );
               },
             ),
-      // floatingActionButton: _CustomFloatingActionButton(
-      //   onPressed: _orderItems, // Pass the order function to the custom button
-      // ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(
             left: 30.0), // Adjust this value to position the button and text
