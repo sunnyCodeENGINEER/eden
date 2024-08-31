@@ -170,13 +170,13 @@ class _CartPageState extends State<CartPage> {
                 return Dismissible(
                   key: Key(item.id.toString()),
                   onDismissed: (direction) {
-                    _removeItem(item);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('${item.name} removed from cart'),
                         backgroundColor: const Color.fromARGB(255, 45, 88, 48),
                       ),
                     );
+                    setState(() => _removeItem(item));
                   },
                   background: Container(color: Colors.red),
                   child: ListTile(
