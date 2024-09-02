@@ -113,6 +113,13 @@ class _WeatherPageState extends State<WeatherPage> {
                       Lottie.asset(
                           getWeatherAnimation(_weather?.mainCondition)),
                       Text(
+                        '${_weather?.mainCondition}',
+                        style: const TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 122, 152, 124)),
+                      ),
+                      Text(
                         '${_weather?.temperature.round().toString()} °C',
                         style: const TextStyle(
                             fontSize: 40,
@@ -122,7 +129,7 @@ class _WeatherPageState extends State<WeatherPage> {
                       const Spacer(),
                     ],
                   ),
-                )) // Your method to build weather data UI
+                ))
               : const Center(
                   child: Text(
                       'Failed to load weather data')), // Error or empty state
